@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div class="login">
+    <h1>Hotel Booking Cancellation Prediction</h1>
+
+    <!-- Form for ML input -->
+    <form action="{{ url_for('predict') }}" method="post">
+      <!-- Fixed Booking ID from dataset -->
+      <input type="hidden" name="Booking_ID" value="INN00001" />
+
+      <input type="number" name="number of adults" placeholder="Number of Adults" required />
+      <input type="number" name="number of children" placeholder="Number of Children" required />
+      <input type="number" name="number of weekend nights" placeholder="Weekend Nights" required />
+      <input type="number" name="number of week nights" placeholder="Week Nights" required />
+
+      <input type="text" name="type of meal" placeholder="Type of Meal (e.g., Meal Plan 1)" required />
+      <input type="number" name="car parking space" placeholder="Car Parking Space (0 or 1)" required />
+      <input type="text" name="room type" placeholder="Room Type (e.g., Room_Type 1)" required />
+      <input type="number" name="lead time" placeholder="Lead Time" required />
+
+      <input type="text" name="market segment type" placeholder="Market Segment Type" required />
+      <input type="number" name="repeated" placeholder="Repeated Guest (0 or 1)" required />
+      <input type="number" name="P-C" placeholder="P-C" required />
+      <input type="number" name="P-not-C" placeholder="P-not-C" required />
+      <input type="number" step="0.01" name="average price " placeholder="Average Price" required />
+      <input type="number" name="special requests" placeholder="Special Requests" required />
+
+      <!-- Automatically set date of reservation -->
+      <input type="hidden" name="date of reservation" id="reservation-date" />
+
+      <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+    <br><br>
+    {{ prediction_text }}
+  </div>
+
+  <script>
+    // Set today's date in YYYY-MM-DD format for 'date of reservation'
+    document.getElementById("reservation-date").value = new Date().toISOString().split('T')[0];
+  </script>
+</body>
+</html>
